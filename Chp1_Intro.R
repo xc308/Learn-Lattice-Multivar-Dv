@@ -38,6 +38,34 @@ histogram(~ gcsescore | score, data = Chem97)
 
 
 
+#---------------------------#
+# 1.1.3 Kernel density plots
+#---------------------------#
+# densityplot() can be used to graph kernel density estimates
+densityplot(~ gcsescore | factor(score), data = Chem97,
+            plot.points = FALSE, ref = TRUE)
+# ref: plot a ref line at 0
+# plot.points: apart from the density line, the original points 
+
+densityplot(~ gcsescore | factor(score), data = Chem97,
+            plot.point = TRUE, ref = TRUE)
+
+# displaying points can be useful for small datasets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
