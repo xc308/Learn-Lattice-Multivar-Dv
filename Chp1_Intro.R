@@ -54,6 +54,76 @@ densityplot(~ gcsescore | factor(score), data = Chem97,
 
 
 
+#=====================#
+# 1.2 Superposition 
+#=====================#
+# pattern would be easier to judge if the density
+# were superposed within the same panel
+# achieved by using score as a grouping variable 
+# instead of a conditioning variable
+
+densityplot(~ gcsescore, data = Chem97, groups = score,
+            plot.points = FALSE, ref = TRUE, 
+            auto.key = list(columns = 3))
+
+# auto.key automatically adds a suitable legend to the plot
+
+
+#==========================#
+# 1.3 The "trellis" object
+#==========================#
+# high-level functions in the lattice package 
+# do not draw anything, but return an object of 
+# class "trellis"
+# An actual graphic is created when such obj are printed
+# by the print()
+
+
+tp1 <- histogram(~ gcsescore | factor(score), data = Chem97)
+tp2 <- densityplot(~ gcsescore, data = Chem97, groups = score, 
+            plot.points = FALSE, 
+            auto.key = list(space = "right", title = "score"))
+
+
+class(tp1)
+# [1] "trellis"
+
+class(tp2)
+# [1] "trellis"
+
+summary(tp1)
+
+# the actual plot can be drawn by calling print()
+# or plot(tp1)
+
+plot(tp1, split = c(1, 1, 1 ,2))
+plot(tp2, split = c(1, 2, 1, 2), newpage = FALSE)
+
+# the 2nd graph shows the pattern of varaince decreasing
+# with mean, which is easy to be missed in the histgram
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
