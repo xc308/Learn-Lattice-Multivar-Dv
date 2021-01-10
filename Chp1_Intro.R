@@ -304,6 +304,42 @@ update(tp1.oats, aspect = "xy", layout = c(0, 18),
 # but all available space are filled up
 
 
+#======================#
+# 2.3 Grouped displays
+#=======================#
+# Superposition is useful than multi panel when the 
+# the number of levels of the grouping variable is small
+
+data("barley")
+head(barley,2)
+
+dotplot(variety ~ yield | site, data = barley,
+        layout = c(2, 3), aspect = 'fill',
+        groups = year, auto.key = list(space = 'right'))
+
+# the plot combine grouping and conditioning 
+# to highlight an anomaly 
+# i.e. in Morris site, the yield in 1932 is more than 1931, 
+# while the relationship of these two years in the rest of sites 
+# are the other way
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
