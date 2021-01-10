@@ -249,6 +249,89 @@ summary(tp1.oats[, 1])
 # in plots of spatial data
 
 
+#---------------#
+# 2.2.2 Layout
+#---------------#
+# Layout: numeric vector giving the number of col, rows, and pages
+# and the page nubmer does not need to specify unless page restrictions are wanted
+
+# panels are drawn starting from the lower-left corner, 
+# proceeding 1st right and then up
+# if as.table = TRUE, then start from upper-left corner
+# going right, then down
+
+
+# if two or more conditioning variables, 
+# layout defualts to the lenght of the first two dim
+
+# the number of cols == the number of levels of the 1st conditioning varaible
+# the number of rows == the nubmer of levels of the 2nd con.var. 
+
+# if the display is abit awkward, transform the "trellis" obj
+# or switching the oder of conditioning varaibles
+
+t(tp1.oats)
+
+
+# another approach: 
+  # set the 1st arg of layout == 0
+  # the 2nd arg: the lower bound on the total number of panels per page
+  # leaving the software free to choose the exact layout
+
+
+update(tp1.oats, aspect = "xy")
+# although the 45 deg banking rule reveals the change of data
+# the display space were wasted mostly
+# so set the layout arg 
+
+update(tp1.oats, aspect = "xy", layout = c(0, 18))
+
+# but now has mulitiple blocks in each row of layout
+# with no visual cue drawing attention to this fact
+
+
+
+update(tp1.oats, aspect = "xy", layout = c(0, 18),
+       between = list(x = c(0, 0, 0.5), y = 0.5))
+
+
+# if there's only one conditioning variable with n levels
+# the default value of layout is c(0, n), thus taking advantage 
+# of automatic layout computation
+
+# when aspect = 'fill', 
+# this computation is carried out with an initial aspect ratio of 1
+# but all available space are filled up
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
