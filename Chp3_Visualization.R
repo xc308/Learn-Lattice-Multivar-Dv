@@ -161,6 +161,14 @@ QQ_function(data = Chem97_mod)
 # no need to use standard box-cox transformation
 
 
+#------------------------------------------------#
+# Supplement: Mutlivariate Box-Cox Transfromation
+#------------------------------------------------#
+
+
+
+
+
 
 
 
