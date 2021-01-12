@@ -262,6 +262,62 @@ wireframe(volcano, panel.aspect = 0.7, zoom = 1, lwd = 0.5)
 
 
 
+#--------------------------------------#
+# 6.2.3 Visualizing discrete array data
+#--------------------------------------#
+# a correlation matrix and a frequency table, 
+# represent discrete data
+# wireframe() and contourplot() are for continuous data
+# levelplot() can still be used, where levels are used to
+# represent pairwise correlation between various continuous characteris
+
+levelplot(corr_Cars93, scales = list(x = list(rot = 90)))
+
+
+
+
+#==========================#
+# 6.3 Theoretical surfaces
+#==========================#
+# consider 4 bivaraite copulas, which are essentially
+# joint distributions on the unit square with uniform marginals
+# goal: to plot the correspoding density functions
+# computed by dcopula() in copula package
+
+
+# start by defining a grid and adding columns to it
+install.packages("copula")
+library(copula)
+Grid_unif_margin <- expand.grid(u = do.breaks(c(0.01, 0.99), 15),
+            v = do.breaks(c(0.01, 0.99), 15))
+
+#dcopula(frankCopula(2), cbind(u, v))
+# dcopula: copula object; 
+# u = a vector of the copula dimension giving the points where the density needs to be evaluated
+
+Grid_unif_margin$frank <- with(Grid_unif_margin, dCopula(cbind(u, v), frankCopula(2)))
+Grid_unif_margin$gumbel <- with(Grid_unif_margin, dCopula(cbind(u, v), gumbelCopula(1.2)))
+Grid_unif_margin$normal <- with(Grid_unif_margin, dCopula(cbind(u, v), normalCopula(.4)))
+Grid_unif_margin$t <- with(Grid_unif_margin, dCopula(cbind(u, v), tCopula(.4)))
+
+wireframe(frank + gumbel + normal + t ~ u * v, 
+          outer = TRUE, zlab = "", 
+          screen = list(z = -30, x = -50),
+          lwd = .5, data  = Grid_unif_margin)
+
+# the densities appear to be flat, as the vertical axis
+# is dominated by changes close to the corners
+
+# try plotting log - transformed densities,
+wireframe(frank + gumbel + normal + t ~ u * v,
+          data = Grid_unif_margin,
+          outer = TRUE, zlab = "",
+          screen = list(z = -30, x = -50),
+          scales = list(z = list(log = TRUE)),
+          lwd = 0.5)
+
+
+
 
 
 
