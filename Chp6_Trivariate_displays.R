@@ -318,6 +318,54 @@ wireframe(frank + gumbel + normal + t ~ u * v,
 
 
 
+#-----------------------------#
+# 6.3.1 Parameterized surfaces
+#------------------------------#
+# The surfaces are defined as z = f(x, y), 
+# where x and y vary over a continuous interval,
+# approximated by a discreted grid
+
+
+
+#===========================================#
+# 6.4 Choosing a paltte for false-color plots
+#============================================#
+# the primary usefulness of level pltos is in 
+# judging patterns in the variability
+
+# USAge.df in latticExtra, records estimated population
+# by age and sex in us btw 1900 and 1979
+
+data(USAge.df, package = "latticeExtra")
+str(USAge.df)
+
+install.packages("RColorBrewer")
+library(RColorBrewer)
+brewer.div <- colorRampPalette(brewer.pal(n = 11, name = "Spectral"),
+                 interpolate = "spline")
+
+levelplot(Population ~ Year * Age | Sex, data = USAge.df,
+          cuts = 199, col.regions = brewer.div(200),
+          aspect = "iso")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
