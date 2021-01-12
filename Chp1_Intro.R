@@ -324,6 +324,60 @@ dotplot(variety ~ yield | site, data = barley,
 # are the other way
 
 
+#==========================#
+# 2.4 annotatition: 
+# Captions, labels, legends
+#===========================#
+# Legends are natural in Grouped display 
+# add by specifying auto.key as a list of suitable components
+
+
+
+#==========================#
+# 2.5 Graphing the data
+#===========================#
+
+
+#----------------------#
+# 2.5.1 Scales and axes
+#----------------------#
+
+data("Titanic")
+head(Titanic, 3)
+as.data.frame(Titanic)
+
+barchart(Class ~ Freq | Sex + Age, 
+         data = as.data.frame(Titanic),
+         groups = Survived, stack = TRUE,
+         layout = c(4, 1), 
+         auto.key = list(title = "Survived", columns = 2))
+
+# need different horizontal scale for different 
+# subgroups of passengers
+# so as to emphasizes the proportion of survivors
+# within each group, rather than absolute numbers
+
+barchart(Class ~ Freq | Sex + Age, 
+         data = as.data.frame(Titanic),
+         groups = Survived, 
+         stack = TRUE, layout = c(4, 1),
+         auto.key = list(title = "Survived", columns = 2),
+         scales = list(x = "free"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
