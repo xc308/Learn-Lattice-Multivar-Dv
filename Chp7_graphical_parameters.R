@@ -123,6 +123,67 @@ update(VAD_plot,
 # for grouped displays with non-default graphical pareameters
 
 
+#==================================#
+# 7.2 Availabe graphical paramters
+#==================================#
+# the graphical parameter system can be viewed as
+# a collection of named settings, each controlling 
+# certain elements in lattice dispalys
+
+# the user must know the names and structures of the setting available
+# the full list is subject to change, 
+# but the most current list can always be obtained by inspecting 
+# the contects of a theme,
+names(trellis.par.get())
+
+# common pattern: their value is simply a list of 
+# standard graphical parameters e.g. col, pch, etc
+
+
+show.settings()
+
+names(trellis.par.get())
+str(trellis.par.get("layout.heights"))
+# List of 19
+# all the components ending with "padding" can be setting to 0
+# to make the layout as little wasteful
+
+
+
+#===========================#
+# 7.3 Non-graphical options
+#===========================#
+# a 2nd set of settings can be queried and modified 
+# using lattice.getOption(), lattice.options()
+# theses are global (not device-specific) and not graphical in nature
+
+# and primarily intended as a developer tool that allows
+# experimentation with minimal code change
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
