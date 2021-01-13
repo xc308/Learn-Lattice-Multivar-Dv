@@ -162,6 +162,242 @@ str(trellis.par.get("layout.heights"))
 
 
 
+#******************************************#
+# Chp8 Plot Coordinates and Axis Annotation
+#*******************************************#
+
+# how the coordinate system for each panel is determeind
+# hwo axes are annotated
+
+
+#===================================#
+# 8.1 Packets and prepanel function
+#===================================#
+
+# each combination of levels of the conditioning varaible
+# defining a trellis obj gives rise to a packet
+
+# a packet is the data subset goes into a panel representing a
+# particular combination
+
+
+#===================#
+# 8.2 The Scales arg
+#===================#
+
+#----------------#
+# 8.2.1 Relation
+#----------------#
+# 3 alterantive schemes, depending on how the panels
+# are relate to each other in the Trelllis display, 
+# how the set of minimal rectangles collectively determines the final rectangele
+# for each packet
+
+# The most common situation : all panels have the same rectangles
+  # scales = "same"
+
+# 2nd situation: allow completely independent rectangles
+  # scales = "free"
+
+# the 3rd option: allow seperate rectangles for each packet, 
+# but their widths and heights to be the same, with 
+# with the intent of making the differences comparable across panels
+  # scales = "sliced"
+
+
+
+# if want to specify the relation between panels separately
+# for horizontal and vertical axes
+# can also be achieved through scales arg
+scales = list(x = "same", y = "free")
+# leads to a common horizontal range
+# and independent vertical ranges
+
+# In general form, scales can be a list containing 
+# components called x and y, affecting the horizontal and vertical axes
+# each of which in turn can be lists containing parameters 
+# in name = value form
+
+# both scales and its x, y components can be a 
+# character string specifying the rule used to determine
+# the packet rectangles
+
+# most other componenets of scales affect the drawing 
+# of tick marks and labels to annotate the axes
+
+#-----------------------------------------#
+# 8.2.2 Axis annotation: Ticks and labels
+#-----------------------------------------#
+# Axis annotation is performed by axis function
+# which defaults to axis.default(), but can overide by user
+
+# log: data will be log-transfromed, scaler logical, default = FALSE
+# draw: logical, if FALSE, the axes are not drawn, adn parameters below have no effect
+
+# alternating: applicable only if relation = "same"
+  # the tick marks are always drawn, but lables can be omitted using alternating parameter
+  # a numeric vector, for each row, 0: not label on both end
+  # 1, on the left, 2, on the right, 3 on both ends
+
+  # for a col, 1 label at the bottom, 2 at the top, 3, both, 0 non
+
+data(biocAccess, package = "latticeExtra")
+head(biocAccess, 2)
+
+
+eqc_time <- with(biocAccess, equal.count(as.numeric(time), 9, overlap = 0.01))
+# shingle 
+head(eqc_time)
+
+xyplot(counts / 1000 ~ time | equal.count(as.numeric(time), 9, overlap = 0.01),
+       data = biocAccess, type = "l", aspect = "xy",
+       strip = FALSE, 
+       ylab = "Number of accesses (per 1000)",
+       xlab = "",
+       scales = list(x = list(relation = "sliced", axs = "i"),
+                     y = list(alternating = FALSE)))
+
+# the use of a date-time obj as a primary variable
+# affects how the x-axis is annotated
+
+
+axis.CF <- function(side, ...) {
+  if (side == "right") {
+    F2C <- function(f) 5 * (f - 32) / 9
+    C2F <- function(c) 32 + 9 * c / 5
+    
+    ylim <- current.panel.limits()$ylim
+    prettyF <- pretty(ylim)
+    prettyC <- pretty(F2C(ylim))
+    
+    panel.axis(side = side, outside = TRUE, 
+               at = prettyF, tck = 5, 
+               line.col = "grey65", 
+               text.col = "grey35")
+    
+    panel.axis(side = side, outside = TRUE, 
+               at = C2F(prettyC), 
+               labels = as.character(prettyC),
+               tck = 1, line.col = "black", 
+               text.col = "black")
+  } else axis.default(side = side, ...)
+}
+
+
+xyplot(nhtemp ~ time(nhtemp), aspect = "xy",
+       type = "o", scales = list(y = list(alternating = 2,
+                                          tck = c(1, 5))),
+       axis = axis.CF, xlab = "Year", 
+       ylab = "Temperature",
+       main = "Yearly temperature in New Haven, CT",
+       key = list(text = list(c("Celcius", "Fahrenheit"),
+                              col = c("black", "grey35")),
+                              columns = 2))
+
+nhtem
+
+
+
+
+
+
+
+
+
+
+#===========================================#
+# 8.4 Scale components and the axis function
+#===========================================#
+# axis annotation is in principle distinct from the determination
+# of panel coordinates
+
+# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
