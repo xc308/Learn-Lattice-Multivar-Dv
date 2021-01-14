@@ -111,6 +111,83 @@ xyplot(Price ~ EngineSize | reorder(AirBags, Price),
 
 
 
+# can use simpleKey() to replace the precedure of trellis.par.get() and Rows()
+# the 1st arg to the simpleKey() must be a vector of characteristic strings or expression
+  # giving the labels in the text col
+
+# 2nd arg can be logical arg points, lines, rectangles specifying corresponding col be included in the key
+# if TRUE, the graphical parameters for corresponding component are constructed
+# using calls to trellis.par.get() and Rows()
+
+
+# so:
+xyplot(Price ~ EngineSize | reorder(AirBags, Price),
+       data = Cars93, groups = Cylinders, 
+       subset = Cylinders != "rotary",
+       scales = list(y = list(log = 2, tick.number = 3)),
+       xlab = "Engine Size (Liter)",
+       ylab = "Average Price (1000 USD)",
+       key = simpleKey(text = levels(Cars93$Cylinders)[1:5],
+       points = TRUE, space = "right"))
+
+
+
+#------------------------------------------------------#
+# 9.2.4 The problem with settings, and the auto.key arg
+#------------------------------------------------------#
+
+# the same "trellis" obj an be plotted mulitple times
+# using different themes, resulting in the use of different 
+# graphical parameters
+
+
+# simplykey() requires the legend to be fully determined when obj is created
+# but it's impossible
+
+# so auto.key(), which can be a list containing arg to be supplied to simplekey()
+
+xyplot(Price ~ EngineSize | reorder(AirBags, Price),
+       data = Cars93, groups = Cylinders, 
+       subset = Cylinders != "rotary",
+       scales = list(y = list(log = 2, tick.number = 3)),
+       xlab = "EngineSize (liters)",
+       ylab = "Average Price (1000 USD)",
+       auto.key = list(text = levels(Cars93$Cylinders)[1:5],
+                       space = "right", points = TRUE))
+
+# This version will update the legend suitably 
+# when resulting obj is plotted with different theme
+
+# auto.key() allows for more intelligent defaults
+  # omit text component: defaults to the group level
+  # omit points, lines, rectangles: have function-specific defaults
+
+
+# auto.key() = list(space = "right")
+# auto.key() = TRUE defaut space to "top"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
