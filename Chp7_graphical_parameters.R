@@ -236,8 +236,11 @@ scales = list(x = "same", y = "free")
 
 # alternating: applicable only if relation = "same"
   # the tick marks are always drawn, but lables can be omitted using alternating parameter
-  # a numeric vector, for each row, 0: not label on both end
-  # 1, on the left, 2, on the right, 3 on both ends
+  # a numeric vector, for each row, 
+    # 0: not label on both end
+    # 1, on the left, 
+    # 2, on the right, 
+    # 3 on both ends
 
   # for a col, 1 label at the bottom, 2 at the top, 3, both, 0 non
 
@@ -284,17 +287,20 @@ axis.CF <- function(side, ...) {
 }
 
 
+# alternating = 2, label on the right, 3 on both end
+
 xyplot(nhtemp ~ time(nhtemp), aspect = "xy",
-       type = "o", scales = list(y = list(alternating = 2,
-                                          tck = c(1, 5))),
+       type = "o", 
+       scales = list(y = list(alternating = 2, tck = c(1, 5))),
        axis = axis.CF, xlab = "Year", 
        ylab = "Temperature",
        main = "Yearly temperature in New Haven, CT",
        key = list(text = list(c("Celcius", "Fahrenheit"),
                               col = c("black", "grey35")),
-                              columns = 2))
+                              columns = 2,
+                  space = "top"))
 
-nhtem
+
 
 
 
