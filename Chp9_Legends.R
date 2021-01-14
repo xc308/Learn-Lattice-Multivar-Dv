@@ -168,6 +168,55 @@ xyplot(Price ~ EngineSize | reorder(AirBags, Price),
 
 
 
+#-----------------------------------------#
+# 9.2.5 Dropping unused levels from groups
+#------------------------------------------#
+
+xyplot(Price ~ EngineSize | reorder(AirBags, Price),
+       data = subset(Cars93, Cylinders != "rotary"),
+       groups = Cylinders[, drop = TRUE],
+       scales = list(y = list(log = 2, tick.number = 3)),
+       xlab = 'Engine Size (liters)',
+       ylab = "Average Price (1000 USD)",
+       auto.key = list(space = "right"))
+
+
+
+
+#--------------------------------------#
+# 9.2.7 Further control: The legend arg
+#---------------------------------------#
+
+# legends produced by draw.key() can be quite general
+# but limited in scope
+
+
+# the legend arg provides far greater flexibility
+# 
+
+dist()
+
+hclust# hierarchical clustering analysis
+
+as.dendrogram() 
+# A dendrogram is a diagram that shows the hierarchical relationship between objects. 
+# It is most commonly created as an output from hierarchical clustering. 
+# The main use of a dendrogram is to work out the best way to allocate objects to clusters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
